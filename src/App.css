@@ -1,32 +1,81 @@
 .App {
+  margin: 3em auto 0 auto;
+  font-family: 'Varela Round', sans-serif;
+  width: 40em;
+  border: 1px solid black;
+}
+
+.FormDiv {
+  margin: 3em auto 3em auto;
+  width: 20em;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.FormDiv3 {
+  margin: 3em auto 3em auto;
+  width: 21em;
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h4 {
+  margin: 0;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  padding: 0.5em 0 0.5em 0;
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+h5 {
+  margin: 0 1em 0.8em 0;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid black;
+  padding: 0.7em;
+}
+
+select {
+  border: 1px solid black;
+  padding: 0.3em;
+  width: 11em;
+  margin-left: 0;
+}
+
+.custom-select {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 25em;
 }
 
-.App-link {
-  color: #61dafb;
+li {
+  list-style-type: none;
+  font-size: 1.2em;
+  font-family: 'Valera Round', sans-serif;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 0.2em;
+  width: 7em;
+  user-select: none;
+  margin: 0.5em 0 0.5em 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.stepDiv {
+  margin-left: 3em;
+}
+
+#buttonNext {
+  float: right;
+}
+
+#SelectDishDiv {
+  display:flex;
+  flex-direction: column;
+  margin: 0 0 3em 0;
+}
+
+#SelectDishDiv .innerDishClass{
+  margin-bottom: 1.5em;
 }
