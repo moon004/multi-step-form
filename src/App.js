@@ -25,7 +25,7 @@ class App extends Component {
       passMeal: false,
       restaurant: '',
       passSelectRest: false,
-      dishes: [{}],
+      parentDishes: [],
 
     }
     this.handleNextStep = this.handleNextStep.bind(this);
@@ -33,39 +33,116 @@ class App extends Component {
   }
 
   handleNextStep = (childState) => () => {
-    console.log('next clicked', childState);
-    const { step } = this.state;
     const {
-      inpValue,
-      meal,
-      passInput,
-      passMeal,
-      restaurantChoice,
-      passSelectRest,
-    } = childState;
-    if (passInput*passMeal) {
+      step,
+      parentDishes,
+      people,
+      restaurant,
+      meal } = this.state;
+    console.log('next clicked', step);
+    if (step === 1) {
+      const {
+        inpValue,
+        meal,
+        passInput,
+        passMeal,
+      } = childState;
+      if (passInput*passMeal) {
+        this.setState({
+          step: step + 1,
+          people: inpValue,
+          meal: meal,
+          passInput: passInput,
+          passMeal: passMeal,
+        });
+        if (this.state.meal !== childState.meal) {
+          this.setState({
+            parentDishes: [],
+          })
+        }
+      }
+    }
+    if (step === 2) {
+      const { restaurantChoice, passSelectRest } = childState;
+      if (passSelectRest) {
+        this.setState({
+          step: step + 1,
+          restaurant: restaurantChoice,
+          passSelectRest: passSelectRest,
+        });
+        console.log('restChoice', restaurant, restaurantChoice)
+        if (restaurant !== restaurantChoice) {
+          this.setState({
+            parentDishes: [],
+            passSelectDish: false
+          });
+        }
+      }    
+    }
+    if (step === 3) {
+      const { passSelectDish, inpValue, selectedDish } = childState;
+      if (passSelectDish) {
+        const dishes = selectedDish.map((item, i) => {
+          return {
+            name: item,
+            quantity: inpValue[i],
+          }
+        });
+        this.setState({
+          step: step + 1,
+          parentDishes: dishes,
+          passSelectDish: passSelectDish,
+        });
+      }
+    }
+    if (step === 4) {
+      console.log('Submited!, Data collected here!',
+        meal, people, restaurant, parentDishes);
       this.setState({
         step: step + 1,
-        people: inpValue,
-        meal: meal,
-        passInput: passInput,
-        passMeal: passMeal,
       });
     }
-    if (passSelectRest) {
+
+  }
+  handlePrevStep = (childState) => () => {
+    const { step } = this.state;
+    
+    // avoid reading null value by segmenting
+    // each step and childState value retrieval.
+    if (step === 2) {
+      const {
+        restaurantChoice,
+        passSelectRest,
+      } = childState;
       this.setState({
-        step: step + 1,
+        step: step - 1,
         restaurant: restaurantChoice,
         passSelectRest: passSelectRest,
-      })
+      });
     }
-  }
-  handlePrevStep = () => () => {
-    const { step, restaurant } = this.state;
-    this.setState({
-      step: step - 1,
-      restaurant: restaurant,
-    });
+    if (step === 3) {
+      const {
+        selectedDish,
+        inpValue,
+        passSelectDish
+      } = childState;
+      const dishes = selectedDish.map((item, i) => {
+        return {
+          name: item,
+          quantity: inpValue[i],
+        }
+      })
+      this.setState({
+        step: step - 1,
+        parentDishes: dishes,
+        passSelectDish: passSelectDish,
+      });
+    }
+    if (step === 4) {
+      this.setState({
+        step: step - 1,
+      });
+    }
   }
 
 
@@ -108,8 +185,16 @@ class App extends Component {
         return (
           <div className="FormDiv">
             <Review
+              handleNextStep={this.handleNextStep}
+              handlePrevStep={this.handlePrevStep}
               stateFromParent={this.state}
             />
+          </div>
+        )
+        case 5:
+        return (
+          <div className="FormDiv">
+            <h4>Your booking has been received!</h4>
           </div>
         )
       }

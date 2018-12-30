@@ -2,7 +2,6 @@
   margin: 3em auto 0 auto;
   font-family: 'Varela Round', sans-serif;
   width: 40em;
-  border: 1px solid black;
 }
 
 .FormDiv {
@@ -21,7 +20,7 @@ h4 {
   margin: 0;
   border: 2px solid black;
   border-radius: 0.5em;
-  padding: 0.5em 0 0.5em 0;
+  padding: 0.2em 0 0.2em 0;
   font-size: 1.2em;
   margin-bottom: 1em;
 }
@@ -45,10 +44,10 @@ select {
 .custom-select {
   display: flex;
   flex-direction: column;
-  height: 25em;
+  height: 22em;
 }
 
-li {
+#SelectRestaurant li, .custom-select li {
   list-style-type: none;
   font-size: 1.2em;
   font-family: 'Valera Round', sans-serif;
@@ -61,7 +60,6 @@ li {
   margin: 0.5em 0 0.5em 0;
 }
 
-
 .stepDiv {
   margin-left: 3em;
 }
@@ -73,9 +71,73 @@ li {
 #SelectDishDiv {
   display:flex;
   flex-direction: column;
-  margin: 0 0 3em 0;
+  margin: 0 0 1em 0;
 }
 
 #SelectDishDiv .innerDishClass{
   margin-bottom: 1.5em;
+}
+
+#reviewDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#reviewDiv .left {
+  text-align: right;
+  font-weight: 800;
+}
+#reviewDiv .right {
+  text-align: left;
+}
+
+#reviewDiv .right .dishListDiv {
+  border: 0.5px solid rgb(85, 85, 85);
+  font-size: 0.75em;
+  padding: 0.8em 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+#reviewDiv .right li {
+  list-style-type: none;
+  margin: 1em 0;
+}
+#reviewDiv .right #dashDiv {
+  margin: 0 0.8em;
+}
+
+#errorUl {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2em 0;
+
+}
+
+#buttonReset {
+  background: rgb(34, 34, 34);
+  color: rgb(233, 233, 233);
+  left: 7.2em;
+}
+#buttonReset:hover {
+  background: rgb(53, 53, 53);
+}
+#buttonReset:active {
+  background: rgb(0, 0, 0);
+}
+
+#errorLister {
+  color: red;
+  list-style-type: none;
+  padding-left: 1.3em;
+  font-size: 0.85em;
+}
+#errorLister:before {
+  color: red;
+  font-weight: 800;
+  display: inline-block;
+  content: "\2717";
+  margin-left: -1.3em;
+  width: 1.3em;
 }

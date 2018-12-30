@@ -23,7 +23,7 @@ const ButStyle = styled.button`
   font-weight: 700;
   border-radius: 0.6em;
   top: 2.5em;
-  left: ${props => props.prev ? '-8em' : '2em'};
+  left: ${props => props.prev ? '-10em' : '4em'};
   position: relative;
   font-size: 1em;
   &:focus {
@@ -45,12 +45,10 @@ class SelectRest extends Component {
     }
     const jsonDish = json['dishes'];
     const { meal } = this.props.stateFromParent;
-    console.log('meal', meal)
     Object.keys(jsonDish).forEach((key) => {
       const jsonAVMeal = jsonDish[key]['availableMeals']
       if (jsonDish[key]['restaurant']
       !== jsonDish[Math.max(0,key-1)]['restaurant']
-      // && (jsonDish['availableMeals'])
       || this.state.arr.length === 0) {
         for (let i in jsonAVMeal) {
           if (jsonAVMeal[i] === meal) {        
@@ -73,7 +71,6 @@ class SelectRest extends Component {
   }
 
   handleSelectRest = (value) => () => {
-    console.log('restaurant', value)
     this.setState({
       restaurantChoice: value,
       passSelectRest: true,
@@ -81,7 +78,7 @@ class SelectRest extends Component {
   }
 
   render() {
-    const { restaurantChoice, arr } = this.state;
+    const { restaurantChoice, arr, passSelectRest } = this.state;
     
     const RestaurantList = arr.map(item => (
       <div>
@@ -95,7 +92,6 @@ class SelectRest extends Component {
       </div>
     ))
     const { handleNextStep, handlePrevStep } = this.props;
-    const { passSelectRest } = this.state;
     const allChildState = this.state
     return (
       <div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
+import {dupChecker} from '../components/tools';
 
 const UlStyle = styled.ul`
   align-items: center;
@@ -45,6 +46,7 @@ class SelectMeal extends Component {
       meal: '',
       passInput: false,
       passMeal: false,
+      errorList: [],
     }
     this.regNumb = /^(?:[1-9]|0[1-9]|10|^$)$/
     this.regSpace = /\s+/
@@ -69,38 +71,55 @@ class SelectMeal extends Component {
     });
   }
 
+  dupChecker = (array, itemToCheck) => {
+    const duplicated = array.some(function(elem) {
+      console.log('elem and itemToCheck', array, this)
+      return elem === this;
+    }, itemToCheck);
+    if (duplicated) {
+      return array
+    }
+    array.push(itemToCheck)
+    return array
+  }
   handleTextChange = () => (event) => {
     console.log('handleTextChange', event.target.value)
+    let { errorList } = this.state;
     this.setState({
       inpValue: event.target.value,
       passInput: true,
+      errorList: [],
     })
+    errorList = [];
     if (!this.regNumb.test(event.target.value)
       && !this.regSpace.test(event.target.value)
         && this.regAlpha.test(event.target.value)) {
       console.log('Must be less than 10!', event.target.value);
       this.setState({
         passInput: false,
+        errorList: dupChecker(errorList,
+          'Number must be between 1-10'),
       });
     }
     if (this.regSpace.test(event.target.value)) {
-      console.log('no whitespace!', event.target.value);
       this.setState({
         passInput: false,
+        errorList: dupChecker(errorList, 'No Whitespace'),
       });
     }
     if (!this.regAlpha.test(event.target.value)) {
-      console.log('no alphabet or special characters!', event.target.value);
       this.setState({
         passInput: false,
+        errorList: dupChecker(errorList, 'Only Numbers'),
       });
     }
     if (event.target.value.length === 0) {
-      console.log('Must be between 1 to 10 people')
       this.setState({
         passInput: false,
+        errorList: dupChecker(errorList, 'No Empty Value'),
       })
     }
+    console.log('errorList', errorList)
   }
 
   handleMealChange = (value) => () => {
@@ -111,7 +130,6 @@ class SelectMeal extends Component {
     })
   }
 
-
   render() {
     const {
       handleNextStep,
@@ -120,9 +138,13 @@ class SelectMeal extends Component {
       inpValue,
       meal,
       passInput,
-      passMeal
+      passMeal,
+      errorList,
     } = this.state;
     const allChildState = this.state;
+    const errors = errorList.map((err, i) => (
+      <li key={i} id="errorLister">{err}</li>
+    ))
     return (
       <div>
         <div className="custom-select">
@@ -151,6 +173,9 @@ class SelectMeal extends Component {
               placeholder="Number of People"
             />
         </div>
+        <ul id="errorUl">
+          {errors}
+        </ul>
           <ButStyle
             id="buttonNext"
             pass={passInput*passMeal}
