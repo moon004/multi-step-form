@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
-import json from '../assets/dishes.json';
 
 const ButStyle = styled.button`
   border: 2px solid black;

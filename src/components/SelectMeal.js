@@ -62,7 +62,6 @@ class SelectMeal extends Component {
       passInput,
       passMeal,
     } = this.props.stateFromParent;
-    console.log('componentwillmount', meal, people, passInput, passMeal);
     this.setState({
       inpValue: people,
       meal: meal,
@@ -73,7 +72,6 @@ class SelectMeal extends Component {
 
   dupChecker = (array, itemToCheck) => {
     const duplicated = array.some(function(elem) {
-      console.log('elem and itemToCheck', array, this)
       return elem === this;
     }, itemToCheck);
     if (duplicated) {
@@ -83,7 +81,6 @@ class SelectMeal extends Component {
     return array
   }
   handleTextChange = () => (event) => {
-    console.log('handleTextChange', event.target.value)
     let { errorList } = this.state;
     this.setState({
       inpValue: event.target.value,
@@ -94,7 +91,6 @@ class SelectMeal extends Component {
     if (!this.regNumb.test(event.target.value)
       && !this.regSpace.test(event.target.value)
         && this.regAlpha.test(event.target.value)) {
-      console.log('Must be less than 10!', event.target.value);
       this.setState({
         passInput: false,
         errorList: dupChecker(errorList,
@@ -119,11 +115,9 @@ class SelectMeal extends Component {
         errorList: dupChecker(errorList, 'No Empty Value'),
       })
     }
-    console.log('errorList', errorList)
   }
 
   handleMealChange = (value) => () => {
-    console.log('meal CHange', value)
     this.setState({
       meal: value,
       passMeal: true,
