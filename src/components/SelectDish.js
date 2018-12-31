@@ -17,7 +17,7 @@ const ButStyle = styled.button`
   font-weight: 700;
   border-radius: 0.6em;
   position: relative;
-  left: ${props => props.prev ? '-10em' : '4em'};
+  left: ${props => props.prev ? '-13em' : '4em'};
   font-size: 1em;
   &:focus {
     outline: none;
@@ -48,7 +48,7 @@ const Option = styled.option`
   display: ${props => props.selectedElem ? 'none' : 'block'};
 `
 
-const DishChild = props => {
+export const DishChild = props => {
   const {
     dishList, 
     inpValue, // text value
@@ -248,7 +248,6 @@ class SelectDish extends Component {
       });
     }
     const counter = nonEmptyCounter(selectedDish);
-    console.log('counter', counter);
     if (counter < (dishNservings.length + 1)) {
       this.setState({
         passSelectDish: false,
@@ -261,7 +260,6 @@ class SelectDish extends Component {
     const { dishNservings, inpValue, selectedDish } = this.state;
     let { errorList } = this.state;
     // Implement max plus
-    console.log('plus', dishNservings, selectedDish)
     if ((dishNservings.length + 1) < selectedDish.length) {
       dishNservings.push(DishChild);
       inpValue[dishNservings.length] = 1;
@@ -324,6 +322,7 @@ class SelectDish extends Component {
           />
           {PlusComponent}
           <PlusButton
+            id="plusButton"
             onClick={this.handlePlusClick}
           >+</PlusButton>
         </div>

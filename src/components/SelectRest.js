@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
 import json from '../assets/dishes.json';
+import {dupChecker, dupCheckerBool} from '../components/tools';
 
 const LiRestStyle = styled.li`
   font-weight: 600;
@@ -47,15 +48,13 @@ class SelectRest extends Component {
     const { meal } = this.props.stateFromParent;
     Object.keys(jsonDish).forEach((key) => {
       const jsonAVMeal = jsonDish[key]['availableMeals']
-      if (jsonDish[key]['restaurant']
-      !== jsonDish[Math.max(0,key-1)]['restaurant']
-      || this.state.arr.length === 0) {
         for (let i in jsonAVMeal) {
-          if (jsonAVMeal[i] === meal) {        
-            this.state.arr.push(jsonDish[key])
+          if (jsonAVMeal[i] === meal
+            && !dupCheckerBool(this.state.arr, jsonDish[key]['restaurant'])) {
+            dupChecker(this.state.arr, jsonDish[key]);
           }
         }
-        }
+        
     });
   }
 

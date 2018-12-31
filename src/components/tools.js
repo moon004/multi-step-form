@@ -1,6 +1,5 @@
 export const dupChecker = (array, itemToCheck) => {
   const duplicated = array.some(function(elem) {
-    console.log('elem and itemToCheck', array, this)
     return elem === this;
   }, itemToCheck);
   if (duplicated) {
@@ -8,6 +7,15 @@ export const dupChecker = (array, itemToCheck) => {
   }
   array.push(itemToCheck)
   return array
+}
+export const dupCheckerBool = (array, itemToCheck) => {
+  const duplicated = array.some(function(elem) {
+    return elem.restaurant === this;
+  }, itemToCheck);
+  if (duplicated) {
+    return true
+  }
+  return false
 }
 
 export const nonEmptyCounter = (arr) => {

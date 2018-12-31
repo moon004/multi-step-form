@@ -32,7 +32,7 @@ describe('<SelectMeal/>', () => {
     const btn = mealForm.find('#buttonNext').at(0);
     const breakfastLi = mealForm.find('li').at(0);
     const input = mealForm.find('input')
-    btn.simulate('click')
+    btn.simulate('click');
     expect(handler).toHaveBeenCalled();
     // test state change
     breakfastLi.simulate('click')

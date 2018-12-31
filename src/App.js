@@ -25,6 +25,7 @@ class App extends Component {
       passMeal: false,
       restaurant: '',
       passSelectRest: false,
+      passSelectDish: false,
       parentDishes: [],
 
     }
@@ -39,7 +40,6 @@ class App extends Component {
       people,
       restaurant,
       meal } = this.state;
-    console.log('next clicked', step);
     if (step === 1) {
       const {
         inpValue,
@@ -50,7 +50,7 @@ class App extends Component {
       if (passInput*passMeal) {
         this.setState({
           step: step + 1,
-          people: inpValue,
+          people: parseInt(inpValue),
           meal: meal,
           passInput: passInput,
           passMeal: passMeal,
@@ -70,7 +70,6 @@ class App extends Component {
           restaurant: restaurantChoice,
           passSelectRest: passSelectRest,
         });
-        console.log('restChoice', restaurant, restaurantChoice)
         if (restaurant !== restaurantChoice) {
           this.setState({
             parentDishes: [],
@@ -148,7 +147,6 @@ class App extends Component {
 
   render() { 
     const { step } = this.state;
-    console.log('step', step)
     const InnerForm = (props) => {
       const { step } = props;
       switch(step) {
