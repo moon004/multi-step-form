@@ -23,3 +23,5 @@ Voila! you are good to go.
 ## The Architecture
 
 This form consist of 4 forms **SelectMeal.js**, **SelectRest.js**, **SelectDish.js**, **Review.js** and they are wrapped inside one parent **App.js**. Each form is served according to the parent's step state. Each and every form's important states will be saved on **parent's state** every time you navigate to the next or previous form. Each and every form's state will be recovered via **parent states** passed down as props namely **stateFromParent**, including the **Review.js** form. The errors generated from the text input box are done by using regex to check the input.
+
+![My Design](pic/multistep-form.png)
